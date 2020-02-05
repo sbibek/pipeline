@@ -30,7 +30,7 @@ def get_files_in_temp_dir():
     return [f for f in listdir(temp_dir) if isfile(join(temp_dir, f))]
 
 def run_zeek(pcapfile, brofile, logfile):
-    command = ['zeek', '-C', '-r', 'pcapfile', 'brofile']
+    command = ['zeek', '-C', '-r', pcapfile, brofile]
     proc = subprocess.Popen(command)
     proc.wait()
 
