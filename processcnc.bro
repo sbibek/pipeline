@@ -50,7 +50,7 @@ event tcp_packet(c:connection, is_orig: bool, flags:string, seq:count, ack:count
 				goodput_track[|goodput_track|] = (pairtrack_bytes[c$id$orig_h][c$id$orig_p][ack][0]*8)/rtt;  			
 			}
 
-			print pairtrack[c$id$orig_h][c$id$orig_p][ack][1],pairtrack[c$id$orig_h][c$id$orig_p][ack][0],pairtrack_bytes[c$id$orig_h][c$id$orig_p][ack][0];
+			print ack, pairtrack[c$id$orig_h][c$id$orig_p][ack][1],pairtrack[c$id$orig_h][c$id$orig_p][ack][0],pairtrack_bytes[c$id$orig_h][c$id$orig_p][ack][0];
 		}
 	}
 }
