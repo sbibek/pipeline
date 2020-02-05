@@ -19,6 +19,12 @@ def log(msg):
     print("[{}] {}".format('PL', msg))
 
 
+def dump_to_file(file, content):
+    f = open(file)
+    f.write(content)
+    f.close()
+
+
 def clear_temp_dir():
     proc = subprocess.Popen(['rm', 'rf', 'temp'])
     proc.wait()
@@ -34,7 +40,7 @@ def run_zeek(pcapfile, brofile, logfile):
     proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     proc.wait()
     out, err = proc.communicate()
-    log(out)
+    dump_to_file(logfile, out)
 
 
 
