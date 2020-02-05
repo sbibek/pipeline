@@ -26,7 +26,7 @@ def dump_to_file(_file, content, flag='w'):
 
 
 def clear_temp_dir():
-    proc = subprocess.Popen(['rm', 'rf', 'temp'])
+    proc = subprocess.Popen(['rm', '-rf', 'temp'])
     proc.wait()
     proc2 = subprocess.Popen(['mkdir', 'temp', 'temp/logs'])
     proc2.wait()
