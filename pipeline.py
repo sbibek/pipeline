@@ -37,6 +37,7 @@ def get_files_in_temp_dir():
 
 def run_zeek(pcapfile, brofile, logfile):
     command = ['zeek', '-C', '-r', pcapfile, brofile]
+    log('*running => {}'.format(command))
     proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     proc.wait()
     out, err = proc.communicate()
@@ -66,6 +67,7 @@ def split_filtered_file():
 def run_zeek_on_splitted_files():
     files = get_files_in_temp_dir()
     log("There are {} files corresponding to {} connections in the filtered file".format(len(files), len(files)))
+    log("Now zeek will be processing the files")
     for file in files:
         run_zeek("{}/{}".format(temp_dir, file),'processcnc.bro', "{}/{}/{}.csv".format(temp_dir,'logs',file.split(".")[0]))
 
