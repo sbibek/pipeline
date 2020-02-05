@@ -19,8 +19,8 @@ def log(msg):
     print("[{}] {}".format('PL', msg))
 
 
-def dump_to_file(file, content):
-    f = open(file)
+def dump_to_file(_file, content, flag='w'):
+    f = open(_file, flag)
     f.write(content)
     f.close()
 
@@ -28,7 +28,7 @@ def dump_to_file(file, content):
 def clear_temp_dir():
     proc = subprocess.Popen(['rm', 'rf', 'temp'])
     proc.wait()
-    proc2 = subprocess.Popen(['mkdir', 'temp'])
+    proc2 = subprocess.Popen(['mkdir', 'temp', 'temp/logs'])
     proc2.wait()
 
 
@@ -40,7 +40,9 @@ def run_zeek(pcapfile, brofile, logfile):
     proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     proc.wait()
     out, err = proc.communicate()
-    dump_to_file(logfile, out)
+    dump_to_file(logfile, out.decode(), 'w')
+    # append to master log file 
+    dump_to_file("{}/{}/{}".format(temp_dir, 'logs','log.csv'), out.decode(),'a')
 
 
 
@@ -65,7 +67,7 @@ def run_zeek_on_splitted_files():
     files = get_files_in_temp_dir()
     log("There are {} files corresponding to {} connections in the filtered file".format(len(files), len(files)))
     for file in files:
-        run_zeek("{}/{}".format(temp_dir, file),'processcnc.bro', "{}/{}.csv".format(temp_dir,file.split(".")[0]))
+        run_zeek("{}/{}".format(temp_dir, file),'processcnc.bro', "{}/{}/{}.csv".format(temp_dir,'logs',file.split(".")[0]))
 
 filter_pcap();
 split_filtered_file();
