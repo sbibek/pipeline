@@ -71,6 +71,6 @@ def run_zeek_on_splitted_files():
     for file in files:
         run_zeek("{}/{}".format(temp_dir, file),'processcnc.bro', "{}/{}/{}.csv".format(temp_dir,'logs',file.split(".")[0]))
 
-filter_pcap();
-split_filtered_file();
-run_zeek_on_splitted_files();
+filter_pcap()
+split_filtered_file()
+run_zeek_on_splitted_files()
