@@ -69,7 +69,7 @@ def run_zeek_on_splitted_files():
     log("There are {} files corresponding to {} connections in the filtered file".format(len(files), len(files)))
     log("Now zeek will be processing the files")
     for file in files:
-        run_zeek("{}/{}".format(temp_dir, file),'processcnc.bro', "{}/{}/{}.csv".format(temp_dir,'logs',file.split(".")[0]))
+        run_zeek("{}/{}".format(temp_dir, file),'mqttprocess.bro', "{}/{}/{}.csv".format(temp_dir,'logs',file.split(".")[0]))
 
 filter_pcap()
 split_filtered_file()
