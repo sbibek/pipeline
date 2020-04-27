@@ -8,10 +8,19 @@ from os.path import isfile, join
 
 # required main pcap file
 if len(sys.argv) == 1:
-    print("**main pcap file is required")
+    print("**main pcap file(s) directory is required")
     exit()
 
-main_pcap_file = sys.argv[1]
+def get_all_main_pcap_files(_dir):
+    return [f for f in listdir(_dir) if isfile(join(_dir, f))]
+
+
+main_pcap_file_dir = sys.argv[1]
+
+
+
+exit();
+
 filtered_pcap_file = "{}{}.pcap".format(main_pcap_file.split('.')[0],'_f')
 temp_dir = 'temp'
 
